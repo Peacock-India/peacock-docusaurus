@@ -35,7 +35,11 @@ const config = {
   },
 
   plugins: [
+    // path.resolve(__dirname, "./node_modules/remark-admonitions"),
+    // path.resolve(__dirname, './node_modules/docusaurus-lunr-search'),
     require.resolve("docusaurus-plugin-image-zoom"),
+    // require.resolve("docusaurus-lunr-search"),
+
     async function myPlugin(context, options) {
       return {
         name: "docusaurus-tailwindcss",
