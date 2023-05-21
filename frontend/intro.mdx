@@ -55,3 +55,53 @@ Open `docs/intro.md` (this page) and edit some lines: the site **reloads automat
 # mark[16:24]
 print("This is Code Hike")
 ```
+
+<CH.Section>
+
+[lorem js](focus://two.js#1[10:21])  
+[lorem py](focus://one.py#1[5:16])
+
+<CH.Code>
+
+```python one.py
+def lorem(ipsum):
+  ipsum + 1
+```
+
+```js two.js
+function lorem(ipsum) {
+  return ipsum + 1
+}
+```
+
+</CH.Code>
+
+</CH.Section>
+
+```py
+print("This is line 1")
+# mark
+print("This is line 2")
+print("This is line 3")
+```
+
+
+export const Highlight = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '20px',
+      color: '#fff',
+      padding: '10px',
+      cursor: 'pointer',
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}>
+    {children}
+  </span>
+);
+
+This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
+
+This is <Highlight color="#1877F2">Facebook blue</Highlight> !

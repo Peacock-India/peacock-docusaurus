@@ -8,10 +8,11 @@ const { remarkCodeHike } = require("@code-hike/mdx");
 const organizationName = "peacock-india";
 const projectName = "peacock-docusaurus";
 const title = "Peacock Doc";
+const tagline = "Peacock India Documentation";
 
 const config = {
   title,
-  tagline: title,
+  tagline: tagline,
   favicon: "img/favicon.ico",
 
   // Set the production URL of your site here
@@ -33,22 +34,40 @@ const config = {
     locales: ["en"],
   },
 
+  plugins: [
+    require.resolve("docusaurus-plugin-image-zoom"),
+    async function myPlugin(context, options) {
+      return {
+        name: "docusaurus-tailwindcss",
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require("tailwindcss"));
+          postcssOptions.plugins.push(require("autoprefixer"));
+          return postcssOptions;
+        },
+      };
+    },
+  ],
+
   presets: [
     [
       "@docusaurus/preset-classic",
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          beforeDefaultRemarkPlugins: [[remarkCodeHike, 
-            {
-              lineNumbers: true,
-              showCopyButton: true,
-              theme,
-              skipLanguages: ["mermaid"],
-              staticMediaQuery: "not screen, (max-width: 768px)",
-              autoImport: true,
-            },
-          ]],
+          beforeDefaultRemarkPlugins: [
+            [
+              remarkCodeHike,
+              {
+                lineNumbers: true,
+                showCopyButton: true,
+                theme,
+                skipLanguages: ["mermaid"],
+                staticMediaQuery: "not screen, (max-width: 768px)",
+                autoImport: true,
+              },
+            ],
+          ],
           editUrl: `https://github.com/${organizationName}/${projectName}/tree/main/`,
         },
         blog: {
@@ -76,15 +95,25 @@ const config = {
         src: "img/logo.svg",
       },
       items: [
+        // {
+        //   type: "doc",
+        //   docId: "intro",
+        //   position: "left",
+        //   label: "Backend",
+        // },
         {
-          type: "doc",
-          docId: "intro",
-          position: "left",
+          to: "/backend",
           label: "Backend",
+          position: "left",
+        },
+        {
+          to: "/frontend/intro",
+          label: "Frontend",
+          position: "left",
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
-          href: "https://github.com/facebook/docusaurus",
+          href: `https://github.com/${organizationName}/${projectName}`,
           label: "GitHub",
           position: "right",
         },
@@ -94,28 +123,20 @@ const config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "Backend",
           items: [
             {
-              label: "Tutorial",
+              label: "start",
               to: "/docs/intro",
             },
           ],
         },
         {
-          title: "Community",
+          title: "Frontend",
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/docusaurus",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/docusaurus",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/docusaurus",
+              label: "start",
+              to: "/docs/intro",
             },
           ],
         },
@@ -128,12 +149,12 @@ const config = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              href: `https://github.com/${organizationName}/${projectName}`,
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Peacock India.`,
     },
     prism: {
       theme: lightCodeTheme,
@@ -145,6 +166,16 @@ const config = {
         theme: require("shiki/themes/material-palenight.json"),
         lineNumbers: false,
         fontSize: 16,
+      },
+    },
+    zoom: {
+      selector: ".markdown :not(em) > img",
+      config: {
+        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        background: {
+          light: "rgb(255, 255, 255)",
+          dark: "rgb(50, 50, 50)",
+        },
       },
     },
   },
