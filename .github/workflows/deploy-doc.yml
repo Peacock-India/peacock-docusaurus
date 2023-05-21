@@ -31,5 +31,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ env.GITHUB_TOKEN }}
-          publish_branch: main  # Change this if you want to deploy to a different branch
+          publish_branch: docs  # Change this if you want to deploy to a different branch
           publish_dir: ./build  # Change this if your build output directory is different
