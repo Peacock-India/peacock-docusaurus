@@ -12,6 +12,10 @@ Get started by **creating a new site**.
 
 Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
 
+```python
+print("Hello, world!")
+```
+
 ### What you'll need
 
 - [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
@@ -45,3 +49,9 @@ The `cd` command changes the directory you're working with. In order to work wit
 The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
 
 Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+
+
+```python hello.py
+# mark[16:24]
+print("This is Code Hike")
+```
