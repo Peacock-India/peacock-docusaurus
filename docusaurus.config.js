@@ -110,11 +110,11 @@ const config = {
           label: "Backend",
           position: "left",
         },
-        {
-          to: "/frontend/intro",
-          label: "Frontend",
-          position: "left",
-        },
+        // {
+        //   to: "/frontend/intro",
+        //   label: "Frontend",
+        //   position: "left",
+        // },
         { to: "/blog", label: "Blog", position: "left" },
         {
           href: `https://github.com/${organizationName}/${projectName}`,
@@ -135,15 +135,15 @@ const config = {
             },
           ],
         },
-        {
-          title: "Frontend",
-          items: [
-            {
-              label: "start",
-              to: "/docs/intro",
-            },
-          ],
-        },
+        // {
+        //   title: "Frontend",
+        //   items: [
+        //     {
+        //       label: "start",
+        //       to: "/docs/intro",
+        //     },
+        //   ],
+        // },
         {
           title: "More",
           items: [
