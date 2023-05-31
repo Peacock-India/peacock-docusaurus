@@ -1,140 +1,188 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
-
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const path = require("path");
+
+const theme = require("shiki/themes/material-ocean.json");
+const { remarkCodeHike } = require("@code-hike/mdx");
 
 const organizationName = "peacock-india";
 const projectName = "peacock-docusaurus";
+const title = "Peacock Doc";
+const tagline = "Peacock India Documentation";
 
-/** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Peacock India Docusaurus",
-  tagline: "Peacock India Docusaurus",
+  title,
+  tagline: tagline,
   favicon: "img/favicon.ico",
 
-  // Set the production url of your site here
+  // Set the production URL of your site here
   url: `https://${organizationName}.github.io`,
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  // For GitHub Pages deployment, it is often '/<projectName>/'
   baseUrl: `/${projectName}/`,
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
+  // GitHub Pages deployment config.
+  // If you aren't using GitHub Pages, you don't need these.
   organizationName: organizationName, // Usually your GitHub org/user name.
   projectName: projectName, // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
   },
 
+  plugins: [
+    // path.resolve(__dirname, "./node_modules/remark-admonitions"),
+    // path.resolve(__dirname, './node_modules/docusaurus-lunr-search'),
+    require.resolve("docusaurus-plugin-image-zoom"),
+    // require.resolve("docusaurus-lunr-search"),
+
+    async function myPlugin(context, options) {
+      return {
+        name: "docusaurus-tailwindcss",
+        configurePostCss(postcssOptions) {
+          // Appends TailwindCSS and AutoPrefixer.
+          postcssOptions.plugins.push(require("tailwindcss"));
+          postcssOptions.plugins.push(require("autoprefixer"));
+          return postcssOptions;
+        },
+      };
+    },
+  ],
+
   presets: [
     [
-      "classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      "@docusaurus/preset-classic",
+      {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          beforeDefaultRemarkPlugins: [
+            [
+              remarkCodeHike,
+              {
+                lineNumbers: true,
+                showCopyButton: true,
+                theme,
+                skipLanguages: ["mermaid"],
+                staticMediaQuery: "not screen, (max-width: 768px)",
+                autoImport: true,
+              },
+            ],
+          ],
           editUrl: `https://github.com/${organizationName}/${projectName}/tree/main/`,
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: `https://github.com/${organizationName}/${projectName}/tree/main/`,
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: [
+            require.resolve("@code-hike/mdx/styles.css"),
+            require.resolve("./src/css/custom.css"),
+          ],
         },
-      }),
+      },
     ],
   ],
 
-  themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
-      // Replace with your project's social card
-      image: "img/docusaurus-social-card.jpg",
-      navbar: {
-        title: "My Site",
-        logo: {
-          alt: "My Site Logo",
-          src: "img/logo.svg",
+  themes: ["mdx-v2"],
+
+  themeConfig: {
+    image: "img/docusaurus-social-card.jpg",
+    navbar: {
+      title: title,
+      logo: {
+        alt: "Peacock India Doc Logo",
+        src: "img/logo.svg",
+      },
+      items: [
+        // {
+        //   type: "doc",
+        //   docId: "intro",
+        //   position: "left",
+        //   label: "Backend",
+        // },
+        {
+          to: "/backend",
+          label: "Backend",
+          position: "left",
         },
-        items: [
-          {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "Tutorial",
-          },
-          { to: "/blog", label: "Blog", position: "left" },
-          {
-            href: "https://github.com/facebook/docusaurus",
-            label: "GitHub",
-            position: "right",
-          },
-        ],
+        // {
+        //   to: "/frontend/intro",
+        //   label: "Frontend",
+        //   position: "left",
+        // },
+        { to: "/blog", label: "Blog", position: "left" },
+        {
+          href: `https://github.com/${organizationName}/${projectName}`,
+          label: "GitHub",
+          position: "right",
+        },
+      ],
+    },
+    footer: {
+      style: "dark",
+      links: [
+        {
+          title: "Backend",
+          items: [
+            {
+              label: "start",
+              to: "/docs/intro",
+            },
+          ],
+        },
+        // {
+        //   title: "Frontend",
+        //   items: [
+        //     {
+        //       label: "start",
+        //       to: "/docs/intro",
+        //     },
+        //   ],
+        // },
+        {
+          title: "More",
+          items: [
+            {
+              label: "Blog",
+              to: "/blog",
+            },
+            {
+              label: "GitHub",
+              href: `https://github.com/${organizationName}/${projectName}`,
+            },
+          ],
+        },
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Peacock India.`,
+    },
+    prism: {
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
+    },
+    codehike: {
+      tutorialDir: path.join(__dirname, "path/to/codehike/tutorials"),
+      playerTheme: {
+        theme: require("shiki/themes/material-palenight.json"),
+        lineNumbers: false,
+        fontSize: 16,
       },
-      footer: {
-        style: "dark",
-        links: [
-          {
-            title: "Docs",
-            items: [
-              {
-                label: "Tutorial",
-                to: "/docs/intro",
-              },
-            ],
-          },
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
-              },
-              {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "Blog",
-                to: "/blog",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+    },
+    zoom: {
+      selector: ".markdown :not(em) > img",
+      config: {
+        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+        background: {
+          light: "rgb(255, 255, 255)",
+          dark: "rgb(50, 50, 50)",
+        },
       },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-      },
-    }),
+    },
+  },
 };
 
 module.exports = config;
