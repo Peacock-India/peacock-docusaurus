@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpeacock_docusaurus=self.webpackChunkpeacock_docusaurus||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome","permalink":"/peacock-docusaurus/blog/welcome"}]}')}}]);

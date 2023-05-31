@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkpeacock_docusaurus=self.webpackChunkpeacock_docusaurus||[]).push([[7962],{8153:e=>{e.exports=JSON.parse('{"permalink":"/peacock-docusaurus/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
