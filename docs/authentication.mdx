@@ -1,0 +1,143 @@
+---
+title: Secure Authentication Backend Documentation
+slug: /authentication
+sidebar_label: '🔒 Authentication Documentation'
+sidebar_position: 4
+tags: [folder, structure, backend]
+---
+
+# Authentication Documentation
+
+This document provides an overview of the authentication mechanisms implemented in the backend codebase of the project. It covers the login, registration, and refresh token functionality.
+
+### Mostly in Modern application we use 2 types of authentication session based authentication and token based authenticate(JWT) but in our application mostly we will use token based.
+
+## Login
+
+**Endpoint:** `POST /api/v1/auth/login`
+
+**Description:**
+This endpoint is used to authenticate a user and obtain an access token.
+
+**Request Body:**
+
+-   `email` (string): The user's email address.
+-   `password` (string): The user's password.
+
+**Response:**
+
+-   Success (HTTP status code 200):
+    ```json
+    {
+    	"success": true,
+    	"data": {
+    		"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkY2M0YTVkZDMwYjRiYzAxZWIwZiIsImVtYWls",
+    		"expiresIn": 3600,
+    		"name": "MR X",
+    		"email": "test@gmail.com",
+    		"profilePicture": "https://example.com/my-pic-123"
+    	}
+    }
+    ```
+    cookie response
+    ```txt
+    token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkY2M0YTVkZDMwYjRiYzAxZWIwZiIsImVtYWlsIjoiYW50YXJkYXMyMzM4QGdtYWlsLmNvbSIsImlhdCI6MTY4ODE4NDg5NywiZXhwIjoxNjg4MjcxMjk3fQ.o6OLsCQRLNdiJClrqIIkfaa4GFyu2bB1kXdiq62Q1pU; Domain=peacockindia.in; Path=/; Expires=Sun, 02 Jul 2023 04:14:57 GMT; HttpOnly; Secure; SameSite=None
+    ```
+
+	response header
+
+	```txt  
+	Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkY2M0YTVkZDMwYjRiYzAxZWIwZiIsImVtYWls
+	```
+
+## Registration
+
+To register a new user, send a `POST` request to the following endpoint:
+
+**Endpoint:** `POST /api/v1/auth/register`
+
+### Request Body
+
+The request body should contain the following fields:
+
+-   `name` (string): The name of the user.
+-   `email` (string): The email address of the user.
+-   `password` (string): The password for the user account.
+
+Example:
+
+  ```jsx {
+		"name": "John Doe",
+		"email": "johndoe@example.com",
+		"password": "mypassword123"
+	}
+	```
+### Response
+Upon successful registration, the API will respond with a status code of 201 (Created) and the following response body:
+
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "1234567890",
+      "name": "John Doe",
+      "email": "johndoe@example.com"
+    }
+  }
+}
+
+````
+
+`user` (object): The registered user object containing the `id`, `name`, and `email`.
+
+    cookie response
+    ```txt
+    token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkY2M0YTVkZDMwYjRiYzAxZWIwZiIsImVtYWlsIjoiYW50YXJkYXMyMzM4QGdtYWlsLmNvbSIsImlhdCI6MTY4ODE4NDg5NywiZXhwIjoxNjg4MjcxMjk3fQ.o6OLsCQRLNdiJClrqIIkfaa4GFyu2bB1kXdiq62Q1pU; Domain=peacockindia.in; Path=/; Expires=Sun, 02 Jul 2023 04:14:57 GMT; HttpOnly; Secure; SameSite=None
+    ```
+
+	response header
+
+	```txt  
+	Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTJkY2M0YTVkZDMwYjRiYzAxZWIwZiIsImVtYWls
+	```
+
+### Error Handling
+
+If the registration fails due to invalid input or any other errors, the API will respond with an appropriate error status code and an error message in the response body.
+
+## Refresh Token
+
+### Endpoint
+
+`POST /api/v1/auth/refresh-token`
+
+**Description:**
+This endpoint is used to refresh an expired access token using a refresh token.
+Request Body
+For this route we don't need any body, cause refresh_token saved in our browser cookie
+
+### Response
+
+Upon successful token refresh, the API will respond with a status code of 200 (OK) and the following response body:
+
+````json
+{
+  "success": true,
+  "data": {
+    "accessToken": "your_new_access_token_here"
+  }
+}```
+
+If the refresh token is invalid or expired, the API will respond with an error message:
+
+```json
+{
+  "success": false,
+  "error": "Error message here"
+}
+````
+
+Following sequence Diagram we have shared a whole flow:
+
+![Steve Jobs Developer Meme](../static/img/backend/sequence-diagram.jpg)
