@@ -1,0 +1,114 @@
+---
+title: The Importance of a Well-Organized Folder Structure for Developer Teams
+slug: /frontend/folder-structure
+sidebar_label: 'Frontend Folder Structure'
+sidebar_position: 3
+tags: [structure, folder-structure, frontend]
+---
+
+In this document, we will discuss the recommended folder structure for organizing frontend code files and assets in a typical web application. A well-organized folder structure promotes maintainability, scalability, and ease of collaboration among developers.
+
+
+```txt
+src/
+├── components/       // Folder for reusable components
+│   ├── common/       // Folder for common components
+│   │   ├── Button.js         // Reusable button component
+│   │   ├── Input.js          // Reusable input component
+│   │   └── ...
+│   ├── forms/        // Folder for form components
+│   │   ├── LoginForm.js      // Login form component
+│   │   ├── RegistrationForm.js    // Registration form component
+│   │   └── ...
+│   ├── layouts/      // Folder for layout components
+│   │   ├── Header.js         // Header component
+│   │   ├── Footer.js         // Footer component
+│   │   └── ...
+│   └── pages/        // Folder for page components
+│       ├── HomePage.js       // Home page component
+│       ├── AboutPage.js      // About page component
+│       └── ...
+├── styles/       // Folder for stylesheets and styling-related files
+│   ├── variables/       // Folder for style variables and constants
+│   │   ├── colors.css         // CSS file defining color variables
+│   │   ├── typography.css     // CSS file defining typography variables
+│   │   └── ...
+│   ├── components/       // Folder for component-specific styles
+│   │   ├── Button.css         // CSS file for styling the Button component
+│   │   ├── Input.css          // CSS file for styling the Input component
+│   │   └── ...
+│   ├── layouts/      // Folder for layout-specific styles
+│   │   ├── Header.css         // CSS file for styling the Header component
+│   │   ├── Footer.css         // CSS file for styling the Footer component
+│   │   └── ...
+│   ├── main.css       // Main CSS file for global styles
+├── utils/
+│   ├── api.js
+│   ├── format.js
+│   ├── validation.js
+│   └── ...
+├── redux/                // Folder for Redux-related files
+│   ├── slices/           // Folder for Redux slices
+│   │   ├── userSlice.js  // File containing the user slice definition
+│   │   ├── cartSlice.js  // File containing the cart slice definition
+│   │   └── ...
+│   └── store.js  
+├── .editorconfig
+├── .env 
+├── .eslintignore
+├── .eslintrc.js
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── jsconfig.json
+├── package.json
+```
+
+## components
+
+This file tree structure represents the organization of the `components` folder in the frontend code. Each folder and file is explained accordingly
+
+- **`common/`** : This folder contains common components that are used across the application. Examples include `Button.js` and `Input.js`, which are reusable UI components.
+
+- **`forms/`**: This folder holds form components used for data entry and submission. Examples include `LoginForm.js` and `RegistrationForm.js`, which are components for login and registration forms, respectively
+
+- **`layouts/`** : This folder includes layout components that define the overall structure of a page. Examples include `Header.js` and `Footer.js`, which are components for the website header and footer.
+
+- **`pages/`** : This folder contains components representing individual pages of the application. Examples include `HomePage.js` and `AboutPage.js`, which are components for the home page and about page.
+
+## styles
+
+This file tree structure represents the organization of the `styles` folder in the frontend code. Each folder and file is explained accordingly:
+
+- **`variables/`**: This folder contains CSS files defining variables and constants for styles. Examples include `colors.css`, which defines color variables, and `typography.css`, which defines typography variables.
+
+- **`components/`: This folder holds component-specific styles. Each component has its own CSS file, such as `Button.css` and `Input.css`, which contain styles specific to the Button and Input components, respectively.
+
+- **`layouts/`** : This folder includes layout-specific styles. Similar to the components folder, each layout component has its own CSS file, such as `Header.css` and `Footer.css`, which contain styles specific to the Header and Footer components, respectively.
+
+- **`main.css`** :  This file is the main CSS file that contains global styles applicable to the entire application.
+
+## Redux
+
+- **`slices/`** : This folder contains files for Redux slices. Redux Toolkit promotes the usage of slices for defining the state, reducers, and actions. It typically includes separate files for different parts of the state, such as `userSlice.js` for managing the user state and `cartSlice.js` for managing the cart state. Additional files can be created for other parts 
+- **`store.js`** : This file contains the configuration for the Redux store. It sets up the store using the `configureStore` function provided by Redux Toolkit. Inside this file, you can import and combine the slices to create the Redux store with the necessary reducers and middleware.
+
+
+## root
+* **`.editorconfig`** : This file defines the coding style and formatting conventions for your project, ensuring consistent coding standards across the development team.
+
+* **`.env`** :  This file is used for environment-specific configurations or sensitive information. It typically includes things like database connection strings, API keys, or other configurable values.
+
+* **`.eslintignore`** : This file specifies patterns for files or directories to be ignored by the ESLint tool, which is used for code linting and style enforcement.
+
+* **`.eslintrc.js`** : This file contains ESLint configurations and rules to enforce coding style and best practices in your codebase.
+
+* **`.gitignore`** : This file specifies files and directories that should be ignored by Git, the version control system. It helps prevent sensitive or unnecessary files from being committed to the repository.
+
+* **`.prettierignore`** : This file specifies files or directories to be ignored by the Prettier code formatter. It allows you to control which files are formatted and which are not.
+
+* **`.prettierrc`** : This file contains configurations for the Prettier code formatter, defining code formatting rules and preferences.
+
+* **`jsconfig.json`** : This file provides configuration options for the JavaScript language service in your project. It can define the project's root, include/exclude patterns, and other JavaScript-related settings.
+
+* **`package.json`** : This file is the manifest file for your project, containing metadata and dependencies information. It lists the project's dependencies, scripts, and other important details required for package management.

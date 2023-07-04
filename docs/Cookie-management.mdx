@@ -1,7 +1,7 @@
 ---
 title: 🍪 Authentication Cookie Best Practices
 slug: /authentication-cookie-best-practices
-sidebar_label: "Authentication Cookie Best Practices"
+sidebar_label: 'Authentication Cookie Best Practices'
 sidebar_position: 3
 tags: [authentication, security, cookies, backend]
 ---
@@ -37,3 +37,15 @@ Consider encrypting and signing authentication cookies to protect their contents
 These best practices help ensure the security, privacy, and reliability of authentication cookies in your backend application. By following these guidelines, you can mitigate common vulnerabilities and enhance the overall authentication mechanism.
 
 Note: Remember to adhere to the specific security recommendations and practices of your chosen backend framework or library.
+
+example:
+
+```js
+res.cookie('token', newRefreshToken, {
+	expires: new Date(Date.now() + config.REFRESH_TOKEN_COOKIE_EXPIRATION),
+	httpOnly: true,
+	secure: true,
+	sameSite: 'none',
+	domain: config.env.NODE_ENV === 'production' ? 'peacockindia.in' : 'localhost',
+});
+```
