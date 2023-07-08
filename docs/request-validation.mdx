@@ -1,0 +1,49 @@
+---
+title: The Importance of Proper Request Body Validation in API Development
+slug: /request-body-validation
+sidebar_label: "Request Body Validation"
+sidebar_position: 2
+tags: [API, request, validation, backend]
+---
+
+## Request Body Validation
+
+When developing APIs, proper request body validation is crucial for ensuring data integrity and enforcing data validation rules. The API follows a set of validation rules for each endpoint to validate the incoming request bodies. Here's an example of how you can perform request body validation in the Application Layer while following the Onion Architecture:
+
+1. Define a validation schema for the request body using a library like Joi.
+2. In the Application Layer, create a dedicated service or function responsible for validating the request body against the defined schema.
+3. Invoke this validation service/function in the appropriate Application Layer component, such as a use case or service method.
+
+Example of request body validation in the Application Layer:
+
+```javascript
+// In the Application Layer
+const Joi = require('joi');
+
+// Define a validation schema for the request body
+const createUserSchema = Joi.object({
+  name: Joi.string().required().label('Name'),
+  age: Joi.number().positive().integer().required().label('Age'),
+  email: Joi.string().email().required().label('Email'),
+});
+
+// Application Layer function responsible for validating the request body
+const validateCreateUserRequest = (requestBody) => {
+  const { error } = createUserSchema.validate(requestBody, { abortEarly: false });
+  if (error) {
+    const validationErrors = error.details.map((detail) => detail.message);
+    throw new Error(`Validation Error: ${validationErrors.join(', ')}`);
+  }
+};
+
+// Example usage in an Application Layer component
+const createUser = (requestBody) => {
+  // Validate the request body before processing
+  validateCreateUserRequest(requestBody);
+
+  // Process the request and create a user
+  // ...
+};
+```
+
+By setting `abortEarly` to `false` in the `validate` function, all validation errors will be collected instead of aborting on the first encountered error. The validationErrors array is then constructed by mapping each validation detail to its corresponding error message. The error messages will now indicate which specific field(s) failed the validation.

@@ -1,12 +1,15 @@
 ---
-title: 📂 Folder Structure
+title: 📂 The Importance of a Well-Organized Folder Structure for Developer Teams
 slug: /folder-structure
 sidebar_label: "📂 Folder Structure"
-sidebar_position: 2
+sidebar_position: 3
 tags: [folder, structure, backend]
 ---
 
-# Folder Structure
+
+A good folder structure is essential for any team of developers. It helps to keep files organized and easy to find, which can save time and frustration. A well-organized folder structure can also help to improve collaboration, as team members can easily see what files have been created or modified.\
+Please look at the tree/picture  below to see our folder structure. Then, we can discuss the purpose of each folder or file.
+
 
 `:::
 ignore the icons 😅 
@@ -70,3 +73,36 @@ ignore the icons 😅
 ### Example Project Folder Structure
 
 ![folder structure](./images/folder-struckture.png)
+
+* **project (root)**: This is the root folder of your project. It contains all of the other files and folders in your project.
+* **prisma** 💻: This folder contains all of the files related to Prisma, a tool that helps you build and manage your database.
+    * **schema.prisma** : This file defines the schema for your database. It tells Prisma what tables and columns your database has, as well as the relationships between them.
+    * **index.js** : This file is the entry point for your Prisma application. It tells Prisma how to connect to your database and how to generate the Prisma Client.
+    * **migrations** : This folder contains the migration files for your Prisma application. Migration files are used to change the schema of your database.
+* **src** : inside of the `src` folder we will mainly solve our application logic | store source code
+    * **api** :   This directory contains the code for your API's endpoints. The code in this directory is organized by version, with each version having its own directory. This makes it easy to manage multiple versions of your API.
+        * **v1**: directory for container all logic related the api
+            * **controllers**: This directory contains the code for your API's controllers. Controllers are responsible for handling incoming requests and responding with appropriate responses.
+            * **handler** : This directory contains the code for your API's handlers. Handlers are responsible for performing specific tasks, such as validating requests, saving data to the database, or generating responses.
+            * **swagger** : This folder contains Swagger documentation files for your API. It provides information about API endpoints, request/response structures, and other related details. The "user.json" and "admin.json" files could represent the Swagger documentation for the user and admin endpoints, respectively.
+        * **v2**: ...
+        * **index.js** : This file serves as the entry point or main file for the API-related functionality.
+    * **config** : This folder contains configuration files for your project, such as environment-specific settings, database configurations, or third-party service configurations.
+    * **middleware** : This folder contains middleware files that handle various aspects of request/response processing, such as authentication ("auth.js"), permission handling ("permit.js"), error handling ("error.js"), logging ("logger.js"), and more.
+    * **providers** : This folder contains provider-specific code or functionality, such as email service providers ("email") and SMS service providers ("sms"). Each provider may have its own specific implementation details within their respective folders.
+    ** **utils** : This folder contains utility files or helper functions that can be used throughout the project. For example, "aws.js" could contain utility functions related to AWS services, "jwt.js" could handle JSON Web Token functionality, and "query-helper.js" could provide helper functions for database queries.
+    * **app.js** : This file represents the main application file, where the server setup and configuration take place. It may include middleware registrations, route handling, and other global application configurations.
+* **.editorconfig** : This file defines the coding style and formatting conventions for your project, ensuring consistent coding standards across the development team.
+* **.env** :  This file is used for environment-specific configurations or sensitive information. It typically includes things like database connection strings, API keys, or other configurable values.
+* **.eslintignore** : This file specifies patterns for files or directories to be ignored by the ESLint tool, which is used for code linting and style enforcement.
+* **.eslintrc.js** : This file contains ESLint configurations and rules to enforce coding style and best practices in your codebase.
+* **.gitignore** : This file specifies files and directories that should be ignored by Git, the version control system. It helps prevent sensitive or unnecessary files from being committed to the repository.
+* **.prettierignore** : This file specifies files or directories to be ignored by the Prettier code formatter. It allows you to control which files are formatted and which are not.
+* **.prettierrc** : This file contains configurations for the Prettier code formatter, defining code formatting rules and preferences.
+* **jsconfig.json** : This file provides configuration options for the JavaScript language service in your project. It can define the project's root, include/exclude patterns, and other JavaScript-related settings.
+* **package.json** : This file is the manifest file for your project, containing metadata and dependencies information. It lists the project's dependencies, scripts, and other important details required for package management.
+* **server.js** : This file represents the main server file that sets up and runs the server for your application. It may include server configurations, initialization, and entry point for your application.
+
+
+
+
